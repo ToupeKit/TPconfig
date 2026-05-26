@@ -1,174 +1,276 @@
 /* ═══════════════════════════════════════════════════════════
    Waybar — Hyprland / ArchLinux
-   Тема: Tokyo Night (тёмная, лаконичная)
+   Тема: Catppuccin Mocha · Peach accent · Floating pill
    ═══════════════════════════════════════════════════════════ */
 
-@define-color bg        #0d0f18;
-@define-color bg-mid    #151825;
-@define-color bg-hover  #1e2235;
-@define-color border    #2a2f45;
-@define-color fg        #c8cde8;
-@define-color fg-dim    #6b7094;
-@define-color accent    #7aa2f7;
-@define-color green     #9ece6a;
-@define-color yellow    #e0af68;
-@define-color red       #f7768e;
-@define-color cyan      #7dcfff;
-@define-color purple    #bb9af7;
+/* ── Палитра Catppuccin Mocha ───────────────────────────── */
+@define-color base       #1e1e2e;
+@define-color mantle     #181825;
+@define-color crust      #11111b;
+@define-color surface0   #313244;
+@define-color surface1   #45475a;
+@define-color surface2   #585b70;
+@define-color overlay0   #6c7086;
+@define-color overlay1   #7f849c;
+@define-color text       #cdd6f4;
+@define-color subtext0   #a6adc8;
+@define-color subtext1   #bac2de;
+@define-color peach      #fab387;
+@define-color yellow     #f9e2af;
+@define-color green      #a6e3a1;
+@define-color teal       #94e2d5;
+@define-color sky        #89dceb;
+@define-color sapphire   #74c7ec;
+@define-color blue       #89b4fa;
+@define-color mauve      #cba6f7;
+@define-color red        #f38ba8;
+@define-color maroon     #eba0ac;
+@define-color pink       #f5c2e7;
+@define-color lavender   #b4befe;
+
+/* ── Глобальные стили ───────────────────────────────────── */
 
 * {
-  font-family: "JetBrainsMono Nerd Font", "Noto Sans", monospace;
-  font-size: 13px;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
   border: none;
   border-radius: 0;
   box-shadow: none;
   min-height: 0;
 }
 
+/* ── Основная панель (floating pill) ────────────────────── */
+
 window#waybar {
-  background-color: @bg;
-  border-bottom: 1px solid @border;
-  color: @fg;
-}
-
-/* ── Общий стиль блоков ─────────────────────────────────── */
-
-.modules-center, .modules-right, .modules-left {
   background: transparent;
+  color: @text;
 }
 
-/* ── Системные ресурсы (Центр) ───────────────────────────── */
+window#waybar > box {
+  background-color: @crust;
+  border: 1px solid @surface0;
+  border-radius: 12px;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+/* ── Секции ─────────────────────────────────────────────── */
+
+.modules-left,
+.modules-right,
+.modules-center {
+  background: transparent;
+  padding: 0 4px;
+}
+
+/* ── Общий стиль модулей ────────────────────────────────── */
+
+label,
+button {
+  border-radius: 7px;
+  padding: 0 8px;
+  margin: 3px 2px;
+  transition: all 0.15s ease;
+}
+
+/* ── CPU ─────────────────────────────────────────────────── */
 
 #cpu {
-  color: @cyan;
-  padding: 0 10px 0 14px;
-  margin: 6px 0;
+  color: @sky;
+  min-width: 72px;
 }
 
+#cpu:hover {
+  background: alpha(@sky, 0.12);
+  color: @sky;
+}
+
+/* ── Память ─────────────────────────────────────────────── */
+
 #memory {
-  color: @purple;
-  padding: 0 10px;
-  margin: 6px 0;
+  color: @mauve;
+  min-width: 72px;
+}
+
+#memory:hover {
+  background: alpha(@mauve, 0.12);
 }
 
 #memory.warning { color: @yellow; }
 #memory.critical { color: @red; }
 
+/* ── Температура ────────────────────────────────────────── */
+
 #temperature {
-  color: @green;
-  padding: 0 10px;
-  margin: 6px 0;
+  color: @teal;
+  min-width: 60px;
 }
 
-#temperature.critical { color: @red; }
+#temperature:hover {
+  background: alpha(@teal, 0.12);
+}
 
-/* ── Воркспейсы ─────────────────────────────────────────── */
+#temperature.critical {
+  color: @red;
+  animation: pulse 1s ease infinite;
+}
+
+/* ── Power Profiles ─────────────────────────────────────── */
+
+#power-profiles-daemon {
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+#power-profiles-daemon.performance {
+  color: @red;
+}
+#power-profiles-daemon.performance:hover {
+  background: alpha(@red, 0.12);
+}
+
+#power-profiles-daemon.balanced {
+  color: @yellow;
+}
+#power-profiles-daemon.balanced:hover {
+  background: alpha(@yellow, 0.12);
+}
+
+#power-profiles-daemon.power-saver {
+  color: @green;
+}
+#power-profiles-daemon.power-saver:hover {
+  background: alpha(@green, 0.12);
+}
+
+/* ── Separator ──────────────────────────────────────────── */
+
+#custom-separator {
+  color: @surface1;
+  font-size: 14px;
+  padding: 0 2px;
+  margin: 3px 0;
+}
+
+/* ── Workspaces (центр) ─────────────────────────────────── */
 
 #workspaces {
-  padding: 0 6px;
-  margin: 6px 4px;
-  border-left: 1px solid @border;
-  border-right: 1px solid @border;
+  background: @surface0;
+  border-radius: 8px;
+  padding: 0 3px;
+  margin: 3px 2px;
 }
 
 #workspaces button {
-  color: @fg-dim;
+  color: @overlay0;
   background: transparent;
   padding: 0 8px;
-  margin: 0 2px;
-  min-width: 20px;
-  border-radius: 4px;
+  margin: 2px 1px;
+  min-width: 22px;
+  min-height: 20px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
   transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
-  background: @bg-hover;
-  color: @fg;
+  color: @text;
+  background: alpha(@surface1, 0.8);
 }
 
 #workspaces button.active {
-  background: @accent;
-  color: @bg;
-  font-weight: bold;
+  color: @crust;
+  background: @peach;
+  box-shadow: 0 0 8px alpha(@peach, 0.4);
 }
 
 #workspaces button.urgent {
+  color: @crust;
   background: @red;
-  color: @bg;
 }
 
-/* ── Управление питанием (Power Profiles) ───────────────── */
-
-#power-profiles-daemon {
-  padding: 0 10px;
-  margin: 6px 0;
-  border-right: 1px solid @border;
+#workspaces button.occupied:not(.active) {
+  color: @subtext1;
+  background: alpha(@surface1, 0.5);
 }
 
-#power-profiles-daemon.performance { color: @red; }
-#power-profiles-daemon.balanced { color: @yellow; }
-#power-profiles-daemon.power-saver { color: @green; }
-
-/* ── Сеть (WiFi) ────────────────────────────────────────── */
+/* ── Сеть ───────────────────────────────────────────────── */
 
 #network {
-  color: @accent;
-  padding: 0 14px 0 10px;
-  margin: 6px 0;
+  color: @blue;
+  min-width: 100px;
+}
+
+#network:hover {
+  background: alpha(@blue, 0.12);
 }
 
 #network.disconnected {
   color: @red;
 }
 
-/* ── Часы (Право) ───────────────────────────────────────── */
+/* ── Трей ───────────────────────────────────────────────── */
 
-#clock {
-  color: @fg;
-  padding: 0 12px 0 16px;
-  margin: 6px 0;
-  border-left: 1px solid @border;
-  letter-spacing: 0.03em;
+#tray {
+  padding: 0 4px;
+  margin: 3px 2px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: alpha(@red, 0.15);
+  border-radius: 6px;
 }
 
 /* ── Батарея ────────────────────────────────────────────── */
 
 #battery {
   color: @green;
+  min-width: 70px;
+}
+
+#battery:hover {
+  background: alpha(@green, 0.12);
+}
+
+#battery.warning {
+  color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+  animation: pulse 1.2s ease infinite;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @sapphire;
+}
+
+/* ── Часы ───────────────────────────────────────────────── */
+
+#clock {
+  color: @peach;
+  font-weight: bold;
+  letter-spacing: 0.02em;
   padding: 0 14px 0 10px;
-  margin: 6px 0;
-  border-left: 1px solid @border;
+  min-width: 80px;
 }
 
-#battery.warning { color: @yellow; }
-#battery.critical:not(.charging) { 
-  color: @red; 
-  animation: pulse 1s linear infinite; 
+#clock:hover {
+  background: alpha(@peach, 0.12);
+  border-radius: 8px;
 }
 
-#battery.charging, #battery.plugged { 
-  color: @cyan; 
-}
-
-/* ── Анимации ───────────────────────────────────────────── */
+/* ── Анимация пульс ─────────────────────────────────────── */
 
 @keyframes pulse {
   0%   { opacity: 1.0; }
-  50%  { opacity: 0.4; }
+  50%  { opacity: 0.35; }
   100% { opacity: 1.0; }
-}
-#modules-center {
-    background-color: rgba(30, 30, 46, 0.8); /* Если нужен фон для всей центральной панели */
-    border-radius: 10px;
-    padding: 0 10px;
-}
-
-/* Заставляем все числа занимать одинаковое место */
-label {
-    font-family: "JetBrainsMono Nerd Font"; /* Или другой моноширинный шрифт */
-}
-
-/* Ограничиваем блоки, чтобы изменение 5% на 100% не толкало соседа */
-#cpu, #memory {
-    min-width: 75px;
 }
