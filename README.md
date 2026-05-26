@@ -6,5 +6,8 @@ my config and style for waybar or other
 **V1 Beta**
 <img width="1366" height="35" alt="image_2026-04-15_23-33-03" src="https://github.com/user-attachments/assets/bd42d768-7366-4e94-8b04-59a62a5459d7" />
 
-V1.0.1 Beta (fix center + orange) color**
+**V1.0.1 Beta (fix center + orange) color**
 <img width="1366" height="34" alt="image" src="https://github.com/user-attachments/assets/6749282e-5a1a-4eb2-90a5-fa98e615a5dd" />
+
+**V1.1 Beta**
+<img width="1366" height="42" alt="2026-05-26-135540_screenshot" src="https://github.com/user-attachments/assets/dbc32fa2-be6c-46ba-b011-ba0912aa4a40" />
